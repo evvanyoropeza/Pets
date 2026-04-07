@@ -1,7 +1,7 @@
-package client;
+package com.example.demo.client;
 
-import dto.PetRequest;
-import model.Pet;
+import com.example.demo.dto.PetRequest;
+import com.example.demo.model.Pet;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

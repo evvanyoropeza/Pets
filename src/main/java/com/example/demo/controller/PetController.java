@@ -1,10 +1,11 @@
-package controller;
+package com.example.demo.controller;
 
-import dto.PetRequest;
-import dto.PetResponse;
+import com.example.demo.dto.PetRequest;
+import com.example.demo.dto.PetResponse;
+import com.example.demo.service.IPetService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.IPetService;
 
 @RestController
 @RequestMapping("/api/pet")
@@ -25,10 +26,10 @@ public class PetController {
     }
 
     @PostMapping
-    public ResponseEntity<PetResponse> createPet(@RequestBody PetRequest request) {
+    public ResponseEntity<PetResponse> createPet(@Valid @RequestBody PetRequest request) {
 
         PetResponse response = petService.createPet(request);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(201).body(response);
     }
 }
