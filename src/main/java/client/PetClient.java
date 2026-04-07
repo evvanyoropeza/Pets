@@ -1,5 +1,5 @@
-package feign;
-import entity.Pet;
+package client;
+import model.Pet;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
