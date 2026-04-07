@@ -1,15 +1,16 @@
 package client;
+
+import dto.PetRequest;
 import model.Pet;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+@FeignClient(name = "petClient", url = "https://petstore.swagger.io/v2")
+public interface PetClient {
 
-@FeignClient(name = "clienteExterno", url = "https://petstore.swagger.io/#/")
+    @GetMapping("/pet/{id}")
+    Pet getPet(@PathVariable("id") Long id);
 
-public interface PetFeign {
-    @GetMapping("/pet/{petId}")
-    public Optional<Pet> readById(@PathVariable() Integer idCteExt);
-
+    @PostMapping("/pet")
+    Pet createPet(@RequestBody PetRequest request);
 }

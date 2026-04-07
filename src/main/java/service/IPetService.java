@@ -1,8 +1,11 @@
 package service;
 
-import entity.Pet;
-import response.PetResponse;
+import dto.PetRequest;
+import dto.PetResponse;
 
 public interface IPetService {
-    public PetResponse readById(Integer idPet);
+
+    PetResponse readById(Integer idPet);
+
+    PetResponse createPet(PetRequest request);
 }

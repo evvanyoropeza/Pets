@@ -1,28 +1,34 @@
 package controller;
 
-import entity.Pet;
-import org.springframework.http.HttpStatus;
+import dto.PetRequest;
+import dto.PetResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import repository.PetRepository;
-import response.PetResponse;
-import service.impl.PetService;
+import org.springframework.web.bind.annotation.*;
+import service.IPetService;
 
+@RestController
+@RequestMapping("/api/pet")
 public class PetController {
-    @GetMapping("/api/pet/{petId}")
-    public ResponseEntity<PetResponse> readById(@PathVariable("idPet") Integer idPet) {
-        try {
-            PetResponse pet = PetService.readById(idPet);
 
-            if (pet == null) {
-                return ResponseEntity.notFound().build();
-            }
+    private final IPetService petService;
 
-            return ResponseEntity.ok(pet);
+    public PetController(IPetService petService) {
+        this.petService = petService;
+    }
 
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    @GetMapping("/{petId}")
+    public ResponseEntity<PetResponse> readById(@PathVariable Long petId) {
+
+        PetResponse response = petService.readById(petId);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<PetResponse> createPet(@RequestBody PetRequest request) {
+
+        PetResponse response = petService.createPet(request);
+
+        return ResponseEntity.ok(response);
     }
 }

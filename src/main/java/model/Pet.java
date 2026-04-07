@@ -1,19 +1,11 @@
-package entity;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package model;
 
-@Entity
-@Table(name = "pets")
+import lombok.Data;
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Pet {
 
-    private int idPet;
+    private Long id;
     private String name;
-    private boolean status;
-
-
+    private String status;
 }
